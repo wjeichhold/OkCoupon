@@ -19,11 +19,13 @@ class Main extends React.Component {
     this.incrementIndex = this.incrementIndex.bind(this);
   }
 
+  
+
   incrementIndex() {
     this.state.index++;
   }
 
-  
+
 
   render() {
     return (
@@ -58,4 +60,3 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('mount')
   );
 });;
-
