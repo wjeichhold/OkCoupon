@@ -1,8 +1,5 @@
 import React from 'react';
 
-/**
- * A counter button: tap the button to increase the count.
- */
 const CouponCard = (props) => {
   return (
       <div className="card mx-auto text-center" style={{"height": "75%", "width": "75%"}}>
