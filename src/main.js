@@ -1,11 +1,12 @@
 console.log('Hello World!');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Counter from './Counter';
- 
+import RouteApp from './route.js';
+
+
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
-    React.createElement(Counter),
+    React.createElement(RouteApp),
     document.getElementById('mount')
   );
 });
