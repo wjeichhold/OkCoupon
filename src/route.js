@@ -1,5 +1,6 @@
 import React from 'react';
-import couponCard from './coupon.js';
+import SavedDealsComp from './SavedDealsComp.js'
+import App from './app.js';
 import {
   HashRouter as Router,
   Route,
@@ -11,19 +12,12 @@ import {
 //Move route paths to App using React-Router-switch statments
 //React Router switch
 
-const savedCoupons = () => (<h2>Saved Coupons</h2>)
-
-const RouteApp = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to='/coupon'>Swipe New Coupons</Link></li>
-        <li><Link to='/savedCoupons'>See Saved Coupons</Link></li>
-      </ul>
-      <Route path='/coupon' component={couponCard}/>
-      <Route path='/savedCoupons' component={savedCoupons}/>
-    </div>
-  </Router>
+const Navigation = () => (
+  <nav>
+    <Link to='/'>Swipe New Coupons</Link>
+    <Link to='/savedDeals'>See Saved Coupons</Link>
+  </nav>
 )
 
-module.exports = RouteApp;
+
+module.exports = Navigation;
