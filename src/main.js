@@ -32,4 +32,5 @@ document.addEventListener('DOMContentLoaded', function() {
     React.createElement(Main),
     document.getElementById('mount')
   );
-});
+});;
+
