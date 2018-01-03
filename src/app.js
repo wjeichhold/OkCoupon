@@ -6,18 +6,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image_url: "https://api.sqoot.com/v2/deals/5394809/image?api_key=kzjh2j",
-      description: "10% off at Stewart Hotel",
-      merchant_name: "Posh Bagel",
-      price: 177.39,
-      discount_percentage: 0.1,
-      id: this.props.id
+      image_url: this.props.coupon.image_url,
+      title: this.props.coupon.title,
+      merchant_name: this.props.coupon.merchant_name,
+      price: this.props.coupon.price,
+      discount_percentage: this.props.coupon.discount_percentage,
+      id: this.props.coupon.id
     }
     this.YesButton = this.YesButton.bind(this);
     this.NoButton = this.NoButton.bind(this);
   }
 
-  get() {
+  getDeals() {
     axios.get('/')
     .then(function(response) {
       console.log('successful post');
@@ -39,7 +39,7 @@ class App extends React.Component {
       .catch((err) => {
         console.error(err);
       });
-      this.props.increment()
+      this.props.increment();
   }
 
   NoButton() {
@@ -60,14 +60,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-      <CouponCard image={this.state.image_url}
-      description={this.state.description}
-      merchant={this.state.merchant_name}
-      price={this.state.price}
-      discount={this.state.discount_percentage}/>
-      <button onClick={this.NoButton}>No</button>
-      <button onClick={this.YesButton}>Yes</button>
+      <div styles={{"height": "100%", "width": "100%"}}>
+          <CouponCard image={this.state.image_url}
+            title={this.state.title}
+            merchant={this.state.merchant_name}
+            price={this.state.price}
+            discount={this.state.discount_percentage}
+            />
+        <h4></h4>
+          <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.YesButton}>Yes</button>
+          <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.NoButton}>No</button>
       </div>
     )
   }
