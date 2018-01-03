@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app.js';
+import axios from 'axios';
 
 class Main extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Main extends React.Component {
     this.incrementIndex = this.incrementIndex.bind(this);
   }
 
-  
+
 
   incrementIndex() {
     this.state.index++;
