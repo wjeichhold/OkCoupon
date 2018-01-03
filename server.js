@@ -19,15 +19,7 @@ app.use(webpackDevMiddleware(compiler, {
     colors: true,
   },
   historyApiFallback: true,
-}));
-<<<<<<< HEAD
- 
-
-  app.set('port', process.env.PORT || 3000)
- 
-  const server = app.listen(app.get('port'))
-// const server = app.listen(3000, function() {
-=======
+})); 
 
 app.get('/helper', (req, res) => {
   apiHelp.couponHelper(11222, (data) => {
@@ -35,10 +27,9 @@ app.get('/helper', (req, res) => {
   })
 })
 
-const server = app.listen(3000, function() {
->>>>>>> 2489fff1593382c35d9601ebe871acc4bdc413cc
+  app.set('port', process.env.PORT || 3000)
+ 
+  const server = app.listen(app.get('port'))
   const host = server.address().address;
   const port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);
-
-// });

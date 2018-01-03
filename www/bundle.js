@@ -1006,6 +1006,10 @@ var Main = function (_React$Component) {
   return Main;
 }(_react2.default.Component);
 
+document.addEventListener('DOMContentLoaded', function () {
+  _reactDom2.default.render(_react2.default.createElement(Main), document.getElementById('mount'));
+});;
+
 /***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {

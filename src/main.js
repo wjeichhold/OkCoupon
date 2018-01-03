@@ -27,3 +27,10 @@ class Main extends React.Component {
     )
   }
 }
+document.addEventListener('DOMContentLoaded', function() {
+  ReactDOM.render(
+    React.createElement(Main),
+    document.getElementById('mount')
+  );
+});;
+
