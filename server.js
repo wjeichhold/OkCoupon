@@ -4,11 +4,13 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const app = express();
 const db = require('./db/index.js')
- 
+const apiHelp = require('./APIhelper.js');
+const bodyParser = require('body-parser');
 const compiler = webpack(webpackConfig);
  
 app.use(express.static(__dirname + '/www'));
- 
+app.use(bodyParser.json());
+
 app.use(webpackDevMiddleware(compiler, {
   hot: true,
   filename: 'bundle.js',
@@ -18,7 +20,13 @@ app.use(webpackDevMiddleware(compiler, {
   },
   historyApiFallback: true,
 }));
- 
+
+app.get('/helper', (req, res) => {
+  apiHelp.couponHelper(11222, (data) => {
+    res.send(data.deals)
+  })
+})
+
 const server = app.listen(3000, function() {
   const host = server.address().address;
   const port = server.address().port;

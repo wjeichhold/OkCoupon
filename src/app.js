@@ -17,7 +17,7 @@ class App extends React.Component {
     this.NoButton = this.NoButton.bind(this);
   }
 
-  get() {
+  getDeals() {
     axios.get('/')
     .then(function(response) {
       console.log('successful post');
