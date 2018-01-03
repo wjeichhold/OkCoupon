@@ -6,6 +6,10 @@ import {
   Link
  } from 'react-router-dom';
 
+//Create Nav Bar with links
+
+//Move route paths to App using React-Router-switch statments
+//React Router switch
 
 const savedCoupons = () => (<h2>Saved Coupons</h2>)
 
