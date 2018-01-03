@@ -23,8 +23,6 @@ class Main extends React.Component {
     this.state.index++;
   }
 
-  
-
   render() {
     return (
       <div className="container" styles={{"height": "100%", "width": "100%"}}>
