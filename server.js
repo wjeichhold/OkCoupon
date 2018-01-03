@@ -41,7 +41,7 @@ app.get('/arrayCoupons', (req, res) => {
   })
 })
 
-app.get('/arrayCoupons', (req, res) => {
+app.get('/savedCoupons', (req, res) => {
   db.Coupons.findAll({where: {saved: 'true'}, limit: 20}).then((data) =>{
     res.body = data
     res.status(200).send('tada!')
