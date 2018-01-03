@@ -23,7 +23,21 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.get('/helper', (req, res) => {
   apiHelp.couponHelper(11222, (data) => {
-    res.send(data.deals)
+    var deals = [];
+    for(var i = 0; i < data.deals.length; i++) {
+      var eachDeal = data.deals[i]
+      var newObj = {}
+      newObj['imgUrl'] = eachDeal.deal.image_url;
+      newObj['title'] = eachDeal.deal.title;
+      newObj['price'] = eachDeal.deal.price;
+      newObj['discount'] = eachDeal.deal.discount_percentage;
+      newObj['merchant'] = eachDeal.deal.merchant.name;
+      newObj['finePrint'] = eachDeal.deal.fine_print;
+      newObj['description'] = eachDeal.deal.description;
+      newObj['url'] = eachDeal.deal.url;
+      deals.push(newObj)
+    }
+    res.send(deals)
   })
 })
 
