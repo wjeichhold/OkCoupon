@@ -3,6 +3,7 @@ import CouponCard from './CouponCard.js';
 import Swipe from 'react-easy-swipe';
 import axios from 'axios';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,13 +20,10 @@ class App extends React.Component {
     }
     this.YesButton = this.YesButton.bind(this);
     this.NoButton = this.NoButton.bind(this);
-    this.onSwipeStart = this.onSwipeStart.bind(this);
-    this.onSwipeMove = this.onSwipeMove.bind(this);
-    this.onSwipeEnd = this.onSwipeEnd.bind(this);
-    this.evaluatePosition = this.evaluatePosition.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("before setState:", this.state, "this props:", nextProps);
     this.setState({
       image_url: nextProps.Coupon.imgUrl,
       title: nextProps.Coupon.title,
@@ -39,9 +37,8 @@ class App extends React.Component {
   }
 
   componentDidUpdate(){
-    // console.log("inside app and updating", this.state)
+    console.log("inside app anfd updating", this.state)
   }
-
 
   getDeals() {
     axios.get('/')
@@ -54,30 +51,30 @@ class App extends React.Component {
   }
 
   YesButton() {
-    // axios.post('/yes', {
-    //   id: this.state.id
-    // })
-    //   .then((response) => {
-    //     console.log('response from clicking yes', response)
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+    axios.post('/yes', {
+      id: this.state.id
+    })
+      .then((response) => {
+        console.log('response from clicking yes', response)
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
 
       this.props.Increment();
   }
 
   NoButton() {
-    // axios.post('/no', {
-    //   id: this.state.id
-    // })
-    //   .then((response) => {
-    //     console.log("response from clicking no", response)
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
-
+    axios.post('/no', {
+      id: this.state.id
+    })
+      .then((response) => {
+        console.log("response from clicking no", response)
+      })
+      .catch((err) => {
+        console.error(err);
+      });
       this.props.Increment()
   }
 
@@ -115,7 +112,7 @@ class App extends React.Component {
   }
 
   render() {
-        // console.log("APP.JS COUPONS", this.props.Coupon, "This state:",this.state)
+        console.log("APP.JS COUPONS", this.props.Coupon, "This state:",this.state)
     return (
       <div className="valueHolder" value={this.state.postion} styles={{"height": "100%", "width": "100%"}}>
         <Swipe
@@ -131,8 +128,6 @@ class App extends React.Component {
               discount={this.state.discount_percentage}
               top={this.state.top}
               left={this.state.left}/>
-
-
         </Swipe>
         <h4></h4>
           <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.YesButton}>Yes</button>
