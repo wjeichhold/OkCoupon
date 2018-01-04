@@ -22,7 +22,7 @@ class Main extends React.Component {
         discount_percentage: "",
         id: 1
       }],
-      index: 1
+      index: 0
     }
     this.incrementIndex = this.incrementIndex.bind(this);
     this.foo = this.foo.bind(this);
