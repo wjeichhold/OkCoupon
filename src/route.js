@@ -1,11 +1,16 @@
 import React from 'react';
-import SavedDealsComp from './SavedDealsComp.js'
-import App from './app.js';
+import ReactDOM from 'react-dom';
+
 import {
   HashRouter as Router,
   Route,
   Link
  } from 'react-router-dom';
+
+ import Home from './main.js';
+ import SavedDealsComp from './SavedDealsComp.js'
+
+ //import path files
 
 //Create Nav Bar with links
 
@@ -13,12 +18,20 @@ import {
 //React Router switch
 
 const Navigation = () => (
-  <nav>
-    <Link to='/'>Swipe New Coupons</Link>
-    <Link to='/savedDeals'>See Saved Coupons</Link>
-  </nav>
+	<Router>
+	  <div>
+	    <div><Link to="/">More Coupons</Link></div>
+        <div><Link to="/saved">Saved Coupons</Link></div>
+
+
+
+	    <Route exact path="/" component={Home}/>
+        <Route path="/saved" component={SavedDealsComp}/>
+      </div>
+    </Router>
 )
 
+<<<<<<< HEAD
 //
 // <div className="container" styles={{"height": "100%", "width": "100%"}}>
 //   <div className="container">
@@ -43,3 +56,8 @@ const Navigation = () => (
 //     <App coupon={this.state.coupons[this.state.index]} increment={this.incrementIndex} />
 //
 module.exports = Navigation;
+=======
+
+
+export default Navigation;
+>>>>>>> 342bd8813f6c27a7187194fdfd726be0b4205365

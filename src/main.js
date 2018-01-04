@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './app.js';
 import Navigation from './route.js'
 import {
@@ -59,31 +58,13 @@ class Main extends React.Component {
   render() {
     console.log('how many times?', this.state.coupons)
     return (
-
-      <div>
-        <div className="container">
-          <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
-        </div>
+    <div>
+      <div className="container">
+        <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
       </div>
-      <Router>
-      <div>
-        <Navigation />
-      </div>
-      <Switch>
-           <Route exact path="/" render={() => {
-             <App coupon={this.state.coupons[this.state.index]} increment={this.incrementIndex}  id={this.state.coupons[this.state.index].id}/>
-           }} />
-           <Route path="/savedDeals" render={() => {
-             <SavedDealsComp />
-           }} />
-       </Switch>
-       </Router>
+    </div>
     )
   }
 }
-document.addEventListener('DOMContentLoaded', function() {
-  ReactDOM.render(
-    React.createElement(Main),
-    document.getElementById('mount')
-  );
-});;
+
+export default Main
