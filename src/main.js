@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app.js';
-import NavBar from './NavBar.js'
+import Navigation from './route.js'
+import {
+  HashRouter as Router,
+  Route,
+  Link
+ } from 'react-router-dom';
+
 import axios from 'axios';
+
 
 class Main extends React.Component {
   constructor(props) {
@@ -52,12 +59,25 @@ class Main extends React.Component {
   render() {
     console.log('how many times?', this.state.coupons)
     return (
+
       <div>
-        <NavBar />
         <div className="container">
           <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
         </div>
       </div>
+      <Router>
+      <div>
+        <Navigation />
+      </div>
+      <Switch>
+           <Route exact path="/" render={() => {
+             <App coupon={this.state.coupons[this.state.index]} increment={this.incrementIndex}  id={this.state.coupons[this.state.index].id}/>
+           }} />
+           <Route path="/savedDeals" render={() => {
+             <SavedDealsComp />
+           }} />
+       </Switch>
+       </Router>
     )
   }
 }
