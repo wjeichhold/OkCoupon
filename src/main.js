@@ -7,14 +7,10 @@ import {
   Route,
   Link
  } from 'react-router-dom';
-<<<<<<< HEAD
 
 import axios from 'axios';
 //testing out my comments
 
-=======
-//Hello
->>>>>>> random message
 class Main extends React.Component {
   constructor(props) {
     super(props);
