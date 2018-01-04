@@ -35,16 +35,18 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.state)
     axios.get('/helper')
     .then(() => {
       axios.get('/arrayCoupons').then((response) => {
+        console.log('is the problem here??', response.data)
         this.foo(response.data);
       })
     })
   }
 
   componentDidUpdate() {
-    console.log('componenet is updating', this.state.index)
+    console.log('componenet is updating', this.state)
   }
 
   incrementIndex() {
