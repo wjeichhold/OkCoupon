@@ -16,10 +16,14 @@ class App extends React.Component {
       id: this.props.Coupon.id,
       position: 0,
       top: 5,
-      left: 0
+      left: 0,
+      opacity: 1
     }
     this.YesButton = this.YesButton.bind(this);
     this.NoButton = this.NoButton.bind(this);
+    this.onSwipeStart = this.onSwipeStart.bind(this);
+    this.onSwipeMove = this.onSwipeMove.bind(this);
+    this.onSwipeEnd = this.onSwipeEnd.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +36,8 @@ class App extends React.Component {
       discount_percentage: nextProps.Coupon.discount,
       id: nextProps.Coupon.id,
       top: 5,
-      left: 0
+      left: 0,
+      opacity: 1
     })
   }
 
@@ -87,7 +92,8 @@ class App extends React.Component {
     console.log(`Moved ${position.y} pixels vertically`, event);
     this.setState({left: position.x,
                    position: position.x,
-                   top: position.y})
+                   top: position.y,
+                   opacity: this.state.opacity - .15})
   }
 
   onSwipeEnd(event) {
@@ -104,9 +110,9 @@ class App extends React.Component {
     let pos = this.state.position;
     if (Math.abs(pos) > 100) {
       if (pos > 0) {
-        this.YesButton();
+        setTimeout(() => {this.YesButton()}, 500);
       } else {
-        this.NoButton();
+        setTimeout(() => {this.NoButton()}, 500);
       }
     }
   }
@@ -127,7 +133,8 @@ class App extends React.Component {
               price={this.state.price}
               discount={this.state.discount_percentage}
               top={this.state.top}
-              left={this.state.left}/>
+              left={this.state.left}
+              opacity={this.state.opacity}/>
         </Swipe>
         <h4></h4>
           <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.YesButton}>Yes</button>
