@@ -37,7 +37,7 @@ app.get('/helper', (req, res) => {
 app.get('/arrayCoupons', (req, res) => {
   db.Coupons.findAll({where: {saved: 'null'}, limit: 10}).then((data) =>{
     res.body = data
-    res.status(200).send('tada!')
+    res.status(200).send(data)
   })
 })
 
