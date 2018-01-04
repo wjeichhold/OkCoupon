@@ -35,6 +35,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
+    console.log('yahhooooooooooooooo')
     axios.get('/helper')
     .then(() => {
       axios.get('/arrayCoupons').then((response) => {
@@ -46,11 +47,13 @@ class Main extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('componenet is updating', this.state.coupons)
+    console.log('componenet is updating', this.state.index)
   }
 
   incrementIndex() {
-    this.state.index++;
+    console.log('inside main.js incremneting', this.state.index)
+    this.setState({index:this.state.index+1})
+    console.log(this.state.index, 'after incrementing')
   }
 
 
@@ -59,7 +62,7 @@ class Main extends React.Component {
     console.log('how many times?', this.state.coupons)
     return (
     <div>
-      <div className="container">
+      <div className="container" style={{'height':"55%", 'width':"55%"}}>
         <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
       </div>
     </div>

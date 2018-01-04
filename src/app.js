@@ -44,33 +44,30 @@ class App extends React.Component {
   }
 
   YesButton() {
-    axios.post('/yes', {
-      id: this.state.id
-    })
-      .then((response) => {
-        this.setState({
-          coupons: response.data
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // axios.post('/yes', {
+    //   id: this.state.id
+    // })
+    //   .then((response) => {
+    //     console.log('response from clicking yes', response)
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+
 
       this.props.Increment();
   }
 
   NoButton() {
-    axios.post('/yes', {
-      id: this.state.id
-    })
-      .then((response) => {
-        this.setState({
-          coupons: response.data
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // axios.post('/no', {
+    //   id: this.state.id
+    // })
+    //   .then((response) => {
+    //     console.log("response from clicking no", response)
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
       this.props.Increment()
   }
 
