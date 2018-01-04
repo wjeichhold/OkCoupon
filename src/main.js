@@ -16,10 +16,10 @@ class Main extends React.Component {
     this.state = {
       coupons: [{
         image_url: "https://api.sqoot.com/v2/deals/5394809/image?api_key=kzjh2j",
-        title: "10% off at Stewart Hotel",
-        merchant_name: "Posh Bagel",
-        price: 177.39,
-        discount_percentage: 0.1,
+        title: "Finding you deals!",
+        merchant_name: "",
+        price: "",
+        discount_percentage: "",
         id: 1
       }],
       index: 0
@@ -38,7 +38,7 @@ class Main extends React.Component {
     axios.get('/helper')
     .then(() => {
       axios.get('/arrayCoupons').then((response) => {
-        console.log("before setting state again", this.state.coupons)
+        console.log("before setting state again", this.state.coupons, response)
         this.foo(response.data);
         console.log("Coupons:",this.state.coupons);
       })
