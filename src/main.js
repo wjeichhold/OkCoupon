@@ -26,9 +26,29 @@ class Main extends React.Component {
       index: 0
     }
     this.incrementIndex = this.incrementIndex.bind(this);
+    this.foo = this.foo.bind(this);
   }
 
+  foo(arg) {
+    this.setState({
+      coupons: arg
+    })
+  }
 
+  componentDidMount() {
+    axios.get('/helper')
+    .then(() => {
+      axios.get('/arrayCoupons').then((response) => {
+        console.log("before setting state again", this.state.coupons)
+        this.foo(response.data);
+        console.log("Coupons:",this.state.coupons);
+      })
+    })
+  }
+
+  componentDidUpdate() {
+    console.log('componenet is updating', this.state.coupons)
+  }
 
   incrementIndex() {
     this.state.index++;
@@ -37,7 +57,14 @@ class Main extends React.Component {
 
 
   render() {
+    console.log('how many times?', this.state.coupons)
     return (
+
+      <div>
+        <div className="container">
+          <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
+        </div>
+      </div>
       <Router>
       <div>
         <Navigation />
