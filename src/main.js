@@ -7,12 +7,20 @@ import {
   Route,
   Link
  } from 'react-router-dom';
-//Hello
+
+import axios from 'axios';
+
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       coupons: [{
+        image_url: "https://api.sqoot.com/v2/deals/5394809/image?api_key=kzjh2j",
+        title: "10% off at Stewart Hotel",
+        merchant_name: "Posh Bagel",
+        price: 177.39,
+        discount_percentage: 0.1,
         id: 1
       }],
       index: 0
@@ -20,9 +28,12 @@ class Main extends React.Component {
     this.incrementIndex = this.incrementIndex.bind(this);
   }
 
+
+
   incrementIndex() {
     this.state.index++;
   }
+
 
 
   render() {

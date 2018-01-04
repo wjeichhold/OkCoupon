@@ -7,7 +7,7 @@ const db = require('./db/index.js')
 const apiHelp = require('./APIhelper.js');
 const bodyParser = require('body-parser');
 const compiler = webpack(webpackConfig);
- 
+
 app.use(express.static(__dirname + '/www'));
 app.use(bodyParser.json());
 
@@ -19,33 +19,40 @@ app.use(webpackDevMiddleware(compiler, {
     colors: true,
   },
   historyApiFallback: true,
-})); 
+}));
 
 app.get('/helper', (req, res) => {
-  apiHelp.couponHelper(11222, (data) => {
-    var deals = [];
+  apiHelp.couponHelper(10005, (data) => {
     for(var i = 0; i < data.deals.length; i++) {
       var eachDeal = data.deals[i]
-      var newObj = {}
-      newObj['imgUrl'] = eachDeal.deal.image_url;
-      newObj['title'] = eachDeal.deal.title;
-      newObj['price'] = eachDeal.deal.price;
-      newObj['discount'] = eachDeal.deal.discount_percentage;
-      newObj['merchant'] = eachDeal.deal.merchant.name;
-      newObj['finePrint'] = eachDeal.deal.fine_print;
-      newObj['description'] = eachDeal.deal.description;
-      newObj['url'] = eachDeal.deal.url;
-      deals.push(newObj)
+      db.Coupons.findOrCreate({where:{imgUrl: eachDeal.deal.image_url, title: eachDeal.deal.title, price: eachDeal.deal.price,
+        discount: eachDeal.deal.discount_percentage, merchant: eachDeal.deal.merchant.name, finePrint: null,
+        description: null, url: eachDeal.deal.url, saved:'null'}})
     }
-    res.send(deals)
+
+    res.status(200).send('done!')
   })
 })
 
+app.get('/arrayCoupons', (req, res) => {
+  db.Coupons.findAll({where: {saved: 'null'}, limit: 10}).then((data) =>{
+    res.body = data
+    res.status(200).send('tada!')
+  })
+})
+
+app.get('/savedCoupons', (req, res) => {
+  db.Coupons.findAll({where: {saved: 'true'}, limit: 20}).then((data) =>{
+    res.body = data
+    res.status(200).send('tada!')
+  })
+})
+// Coupons.findAll({ where:{seen:'null', limit: 20 })
+
+
   app.set('port', process.env.PORT || 3000)
- 
+
   const server = app.listen(app.get('port'))
   const host = server.address().address;
   const port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);
-});
-
