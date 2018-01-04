@@ -22,7 +22,7 @@ class Main extends React.Component {
         discount_percentage: "",
         id: 1
       }],
-      index: 0
+      index: 1
     }
     this.incrementIndex = this.incrementIndex.bind(this);
     this.foo = this.foo.bind(this);
@@ -35,10 +35,13 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
+    console.log('yahhooooooooooooooo')
     axios.get('/helper')
     .then(() => {
       axios.get('/arrayCoupons').then((response) => {
+        console.log("before setting state again", this.state.coupons, response)
         this.foo(response.data);
+        console.log("Coupons:",this.state.coupons);
       })
     })
   }
@@ -48,15 +51,15 @@ class Main extends React.Component {
   }
 
   incrementIndex() {
-    // console.log('inside main.js incremneting', this.state.index)
+    console.log('inside main.js incremneting', this.state.index)
     this.setState({index:this.state.index+1})
-    // console.log(this.state.index, 'after incrementing')
+    console.log(this.state.index, 'after incrementing')
   }
 
 
 
   render() {
-    // console.log('how many times?', this.state.coupons)
+    console.log('how many times?', this.state.coupons)
     return (
     <div>
       <div className="container" style={{'height':"55%", 'width':"55%"}}>

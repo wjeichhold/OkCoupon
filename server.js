@@ -29,11 +29,10 @@ app.get('/helper', (req, res) => {
       db.Coupons.findOrCreate({where: {
           imgUrl: eachDeal.deal.image_url, 
           title: eachDeal.deal.title, 
-          price: eachDeal.deal.price,
+          price: JSON.stringify(eachDeal.deal.price),
           discount: JSON.stringify(eachDeal.deal.discount_percentage), 
           merchant: eachDeal.deal.merchant.name, 
           url: eachDeal.deal.url,
-          saved: 'null' 
         }
       })
         .spread((Teams, created) => {
@@ -60,17 +59,17 @@ app.get('/savedCoupons', (req, res) => {
   })
 })
 
-// db.Coupons.findOrCreate({where:{imgUrl: 'oBaby', title: 'you', price: 69, discount: 69, merchant: 'you got what I neeed', url: 'oh you say hes just a friend', saved: 'true'}}).spread((Coupons, created) => {
-//         console.log(Coupons.get({
-//           plain: true
-//         }))
-//       })
+app.post('/yes', (req, res) => {
+  db.Coupons.update({saved: 'true'}, {where: {id: req.body.id}}).then((data) => {
+    res.status(201).send('updated to true')
+  })
+})
 
-
-
-
-
-
+app.post('/no', (req, res) => {
+  db.Coupons.update({saved: 'false'}, {where: {id: req.body.id}}).then((data) => {
+    res.status(201).send('updated to false')
+  })
+})
 
 
   app.set('port', process.env.PORT || 3000)

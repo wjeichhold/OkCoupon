@@ -4,7 +4,7 @@ var key = require('./config.js').apiKey;
 var couponHelper = function(zip, callback) {
 	
 	var options = {
-		url: `http://api.sqoot.com/v2/deals?api_key=${key}&location=${zip}&order=expires_at`
+		url: `http://api.sqoot.com/v2/deals?api_key=${key}&location=${zip}&order=expires_at&per_page=40`
 	}
 
 	request.get(options, function(err, res, body) {
