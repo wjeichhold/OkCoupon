@@ -22,7 +22,7 @@ class SavedDealsComp extends React.Component {
 	getDeals(response) {
 		console.log('saveddd coupons response', response)
 
-		this.setState({savedDeals: response})
+		// this.setState({savedDeals: response})
 
 	}
 
