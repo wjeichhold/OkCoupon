@@ -1,6 +1,8 @@
 import React from 'react';
-import CouponCard from './CouponCard.js'
-import axios from 'axios'
+import CouponCard from './CouponCard.js';
+import Swipe from 'react-easy-swipe';
+import axios from 'axios';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +13,10 @@ class App extends React.Component {
       merchant_name: this.props.Coupon.merchant,
       price: this.props.Coupon.price,
       discount_percentage: this.props.Coupon.discount,
-      id: this.props.Coupon.id
+      id: this.props.Coupon.id,
+      position: 0,
+      top: 5,
+      left: 0
     }
     this.YesButton = this.YesButton.bind(this);
     this.NoButton = this.NoButton.bind(this);
@@ -25,7 +30,9 @@ class App extends React.Component {
       merchant_name: nextProps.Coupon.merchant,
       price: nextProps.Coupon.price,
       discount_percentage: nextProps.Coupon.discount,
-      id: nextProps.Coupon.id
+      id: nextProps.Coupon.id,
+      top: 5,
+      left: 0
     })
   }
 
@@ -71,17 +78,57 @@ class App extends React.Component {
       this.props.Increment()
   }
 
+  onSwipeStart(event) {
+    console.log('Start swiping...', event);
+  }
+
+  onSwipeMove(position, event) {
+    console.log(`Moved ${position.x} pixels horizontally`, event);
+    console.log(`Moved ${position.y} pixels vertically`, event);
+    this.setState({left: position.x,
+                   position: position.x,
+                   top: position.y})
+  }
+
+  onSwipeEnd(event) {
+    // console.log('End swiping...', event);
+    // console.log('this state inside from onSwipeEnd', this.state)
+    this.evaluatePosition()
+    //call some function
+    //said function needs to access the state.position at last update
+    //in that function evaluate that state value and clal either yes or no
+  }
+
+  evaluatePosition() {
+    // console.log('inside evaluate position')
+    let pos = this.state.position;
+    if (Math.abs(pos) > 100) {
+      if (pos > 0) {
+        this.YesButton();
+      } else {
+        this.NoButton();
+      }
+    }
+  }
 
   render() {
         console.log("APP.JS COUPONS", this.props.Coupon, "This state:",this.state)
     return (
-      <div styles={{"height": "100%", "width": "100%"}}>
-          <CouponCard image={this.state.image_url}
-            title={this.state.title}
-            merchant={this.state.merchant_name}
-            price={this.state.price}
-            discount={this.state.discount_percentage}
-            />
+      <div className="valueHolder" value={this.state.postion} styles={{"height": "100%", "width": "100%"}}>
+        <Swipe
+          onSwipeStart={this.onSwipeStart}
+          onSwipeMove={this.onSwipeMove}
+          onSwipeEnd={this.onSwipeEnd}>
+
+
+            <CouponCard image={this.state.image_url}
+              title={this.state.title}
+              merchant={this.state.merchant_name}
+              price={this.state.price}
+              discount={this.state.discount_percentage}
+              top={this.state.top}
+              left={this.state.left}/>
+        </Swipe>
         <h4></h4>
           <button type="button" className="btn btn-success btn-lg btn-block" onClick={this.YesButton}>Yes</button>
           <button type="button" className="btn btn-danger btn-lg btn-block" onClick={this.NoButton}>No</button>

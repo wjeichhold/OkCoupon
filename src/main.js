@@ -35,11 +35,11 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    console.log('yahhooooooooooooooo')
+    console.log(this.state)
     axios.get('/helper')
     .then(() => {
       axios.get('/arrayCoupons').then((response) => {
-        console.log("before setting state again", this.state.coupons, response)
+        console.log('is the problem here??', response.data)
         this.foo(response.data);
         console.log("Coupons:",this.state.coupons);
       })
@@ -47,7 +47,7 @@ class Main extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('componenet is updating', this.state.index)
+    console.log('componenet is updating', this.state)
   }
 
   incrementIndex() {
