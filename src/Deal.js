@@ -12,6 +12,9 @@ const Deal = (props) => (
 					<li className="list-group-item">Discount Percent: {props.deal.discount}</li>
 				</ul>
 				<a href={props.deal.url} className="btn btn-primary" style={{"position": "absolute", "bottom": "0px"}}>Deal Link</a>
+					<a class="twitter-share-button"
+		        href={`https://twitter.com/intent/tweet?text=Join%20me%20on%20coupon%20adventures%21%20${props.deal.pureUrl}`}>
+		      Tweet</a>
 			</div>
 		</div>
 	</div>

@@ -32,6 +32,7 @@ app.post('/helper', (req, res) => {
           discount: JSON.stringify(eachDeal.deal.discount_percentage), 
           merchant: eachDeal.deal.merchant.name, 
           url: eachDeal.deal.url,
+          pureUrl: eachDeal.deal.untracked_url
         }
       })
         .spread((Teams, created) => {
