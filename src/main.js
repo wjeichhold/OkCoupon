@@ -30,6 +30,7 @@ class Main extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this)
     this.foo = this.foo.bind(this);
+    this.alerter = this.alerter.bind(this);
   }
 
   foo(arg) {
@@ -37,6 +38,7 @@ class Main extends React.Component {
       coupons: arg
     })
   }
+
 
   // componentDidMount() {
   //   console.log(this.state)
@@ -50,15 +52,10 @@ class Main extends React.Component {
   //   })
   // }
 
-  componentDidUpdate() {
-    console.log('componenet is updating', this.state)
+  incrementIndex() {
+    this.setState({index:this.state.index+1})
   }
 
-  incrementIndex() {
-    console.log('inside main.js incremneting', this.state.index)
-    this.setState({index:this.state.index+1})
-    console.log(this.state.index, 'after incrementing')
-  }
 
     handleChange (e) {
     this.setState({
@@ -82,11 +79,14 @@ class Main extends React.Component {
     })
     }
   }
-
+  
+  alerter() {
+    alert("you're all out of coupons! go check out what you've got saved!")
+  }
 
 
   render() {
-    if(this.state.flag === false){
+        if(this.state.flag === false){
               return (
     <div className='container'>
     <p> Whats your area code? </p>
@@ -95,15 +95,24 @@ class Main extends React.Component {
         </button>
     </div>
     );
-    } else {
-      console.log('how many times?', this.state)
-      return (
-      <div>
-        <div className="container" style={{'height':"55%", 'width':"55%"}}>
-          <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
+    } else{
+      if (this.state.index === this.state.coupons.length-1) {
+        return (
+          <div>
+            <div className="container" style={{'height':"55%", 'width':"55%"}}>
+              <App Coupon={this.state.coupons[this.state.coupons.length-1]} Increment={this.alerter}/>
+            </div>
+          </div>
+          )
+      } else {
+        return (
+        <div>
+          <div className="container" style={{'height':"55%", 'width':"55%"}}>
+            <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
+          </div>
         </div>
-      </div>
-      )
+        )
+      }
     }
   }
 }
