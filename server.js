@@ -21,8 +21,8 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true,
 }));
 
-app.get('/helper', (req, res) => {
-  apiHelp.couponHelper(10005, (data) => {
+app.post('/helper', (req, res) => {
+  apiHelp.couponHelper(req.body.postal, (data) => {
     for(var i = 0; i < data.deals.length; i++) {
       var eachDeal = data.deals[i]
       console.log('eachDeal', eachDeal.deal.discount_percentage)
