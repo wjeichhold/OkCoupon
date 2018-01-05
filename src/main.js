@@ -22,10 +22,11 @@ class Main extends React.Component {
         discount_percentage: "",
         id: 1
       }],
-      index: 1
+      index: 0
     }
     this.incrementIndex = this.incrementIndex.bind(this);
     this.foo = this.foo.bind(this);
+    this.alerter = this.alerter.bind(this);
   }
 
   foo(arg) {
@@ -35,38 +36,41 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state)
     axios.get('/helper')
     .then(() => {
       axios.get('/arrayCoupons').then((response) => {
-        console.log('is the problem here??', response.data)
         this.foo(response.data);
-        console.log("Coupons:",this.state.coupons);
       })
     })
   }
 
-  componentDidUpdate() {
-    console.log('componenet is updating', this.state)
-  }
-
   incrementIndex() {
-    console.log('inside main.js incremneting', this.state.index)
     this.setState({index:this.state.index+1})
-    console.log(this.state.index, 'after incrementing')
   }
 
+  alerter() {
+    alert("you're all out of coupons! go check out what you've got saved!")
+  }
 
 
   render() {
-    console.log('how many times?', this.state.coupons)
-    return (
-    <div>
-      <div className="container" style={{'height':"55%", 'width':"55%"}}>
-        <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
+    if (this.state.index === this.state.coupons.length-1) {
+      return (
+        <div>
+          <div className="container" style={{'height':"55%", 'width':"55%"}}>
+            <App Coupon={this.state.coupons[this.state.coupons.length-1]} Increment={this.alerter}/>
+          </div>
+        </div>
+        )
+    } else {
+      return (
+      <div>
+        <div className="container" style={{'height':"55%", 'width':"55%"}}>
+          <App Coupon={this.state.coupons[this.state.index]} Increment={this.incrementIndex} />
+        </div>
       </div>
-    </div>
-    )
+      )
+    }
   }
 }
 
