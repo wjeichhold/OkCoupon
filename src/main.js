@@ -15,7 +15,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       coupons: [{
-        image_url: "https://api.sqoot.com/v2/deals/5394809/image?api_key=kzjh2j",
+        image_url: "http://psdwizard.com/wp-content/uploads/2016/07/octo-loader.gif",
         title: "Finding you deals!",
         merchant_name: "",
         price: "",
@@ -34,9 +34,11 @@ class Main extends React.Component {
   }
 
   foo(arg) {
-    this.setState({
-      coupons: arg
-    })
+    setTimeout( () =>{
+      this.setState({
+        coupons: arg
+      })
+    }, 2000)
   }
 
 
